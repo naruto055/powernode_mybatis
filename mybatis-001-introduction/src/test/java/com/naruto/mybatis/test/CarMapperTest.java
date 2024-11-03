@@ -1,6 +1,7 @@
 package com.naruto.mybatis.test;
 
 
+import com.naruto.mybatis.utils.SqlSessionUtil;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -15,7 +16,7 @@ import java.io.IOException;
  */
 public class CarMapperTest {
     @Test
-    public void testInsert(){
+    public void testInsert() {
         SqlSessionFactory sessionFactory = null;
         SqlSession sqlSession = null;
         try {
@@ -40,5 +41,14 @@ public class CarMapperTest {
                 sqlSession.close();
             }
         }
+    }
+
+    @Test
+    public void testInsertCarByUtil() {
+        SqlSession sqlSession = SqlSessionUtil.openSqlSession();
+        int count = sqlSession.insert("insertCar");
+        System.out.println("插入条数：" + count);
+        sqlSession.commit();
+        sqlSession.close();
     }
 }
