@@ -75,4 +75,12 @@ public class CarMapperTest {
         List<Object> cars = sqlSession.selectList("selectAll");
         cars.forEach(System.out::println);
     }
+
+    @Test
+    public void testNamespace() {
+        SqlSession sqlSession = SqlSessionUtil.openSqlSession();
+        List<Object> selectAll = sqlSession.selectList("car.selectAll");
+        selectAll.forEach(System.out::println);
+        sqlSession.close();
+    }
 }
