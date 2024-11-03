@@ -11,6 +11,7 @@
     <modules>
         <module>mybatis-001-introduction</module>
         <module>junit-test</module>
+        <module>mybatis-002-crud</module>
     </modules>
 
     <dependencies>
