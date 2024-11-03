@@ -12,4 +12,10 @@
             (id, car_num, brand, guide_price, produce_time, car_type)
         values (null, #{carNum}, #{brand}, #{guidePrice}, #{produceTime}, #{carType})
     </insert>
+
+    <delete id="deleteById">
+        delete
+        from t_car
+        where id = #{id};
+    </delete>
 </mapper>

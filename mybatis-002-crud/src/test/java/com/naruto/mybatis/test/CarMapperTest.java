@@ -41,4 +41,13 @@ public class CarMapperTest {
         sqlSession.commit();
         sqlSession.close();
     }
+
+    @Test
+    public void testDeleteById() {
+        SqlSession sqlSession = SqlSessionUtil.openSqlSession();
+        int count = sqlSession.delete("deleteById", 11L);
+        System.out.println(count);
+        sqlSession.commit();
+        sqlSession.close();
+    }
 }
