@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,5 +50,29 @@ public class CarMapperTest {
         System.out.println(count);
         sqlSession.commit();
         sqlSession.close();
+    }
+
+    @Test
+    public void testUpdateById() {
+        Car car = new Car(4L, "9999", "比亚迪秦", 39.00, "2024-11-11", "新能源");
+        SqlSession sqlSession = SqlSessionUtil.openSqlSession();
+        int count = sqlSession.update("updateById", car);
+        System.out.println(count);
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void testSelectById() {
+        SqlSession sqlSession = SqlSessionUtil.openSqlSession();
+        Car car = sqlSession.selectOne("selectById", 4L);
+        System.out.println(car);
+    }
+
+    @Test
+    public void testSelectAll() {
+        SqlSession sqlSession = SqlSessionUtil.openSqlSession();
+        List<Object> cars = sqlSession.selectList("selectAll");
+        cars.forEach(System.out::println);
     }
 }

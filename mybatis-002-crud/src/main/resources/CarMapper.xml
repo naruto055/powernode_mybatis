@@ -18,4 +18,25 @@
         from t_car
         where id = #{id};
     </delete>
+
+    <update id="updateById">
+        update t_car
+        set car_num      = #{carNum},
+            brand        = #{brand},
+            guide_price  = #{guidePrice},
+            produce_time = #{produceTime},
+            car_type     = #{carType}
+        where id = #{id};
+    </update>
+
+    <select id="selectById" resultType="com.naruto.mybatis.pojo.Car">
+        select id, car_num carNum, brand, guide_price guidePrice, produce_time produceTime, car_type carType
+        from t_car
+        where id = #{id};
+    </select>
+
+    <select id="selectAll" resultType="com.naruto.mybatis.pojo.Car">
+        select id, car_num carNum, brand, guide_price guidePrice, produce_time produceTime, car_type carType
+        from t_car;
+    </select>
 </mapper>
