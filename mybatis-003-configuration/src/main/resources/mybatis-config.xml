@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- <setting name="logImpl" value="STDOUT_LOGGING" /> -->
+        <setting name="logImpl" value="SLF4J"/>
+    </settings>
+
+    <!-- default表示默认使用的环境 -->
+    <environments default="development">
+        <!-- 一般一个数据库会对应一个sqlSessionFactory对象 -->
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+
+            <!--
+                dataSource 被称为数据源，为程序提供Connection对象
+                数据源实际上是一套规范，JDK中有这套规范，javax.sql.DataSource
+                常见的数据源组件有：阿里巴巴的Druid、c3p0、DBCP、HikariCP等
+
+                type属性用来指定数据源的类型：就是指具体是用什么方式来获取Connection对象
+                type属性值有三个：
+                1. UNPOOLED：不池化的方式，每次都去创建连接，使用完就关闭，不推荐使用
+                2. POOLED：池化的方式，使用连接池，可以重复使用连接，减少创建连接的次数，推荐使用
+                3. JNDI：这是一种规范，一般都是由web容器来实现，比如tomcat
+             -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/powernode"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root123."/>
+                <!-- 正常使用连接池的话，池中有很多参数需要配置，设置好参数可以让连接池发挥得更好 -->
+                <!-- poolMaximumActiveConnections表示连接池中最多的正在使用的连接对象数量上限 -->
+                <property name="poolMaximumActiveConnections" value=""/>
+            </dataSource>
+        </environment>
+
+        <!-- 这是mybatis的另一个环境，也就是连接的数据库是另一个数据库mybatis -->
+        <environment id="mybatisDB">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOL">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root123."/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--sql映射文件创建好之后，需要将该文件路径配置到这里-->
+        <mapper resource="CarMapper.xml"/>
+    </mappers>
+</configuration>
