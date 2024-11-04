@@ -47,4 +47,13 @@ public class ConfigurationTest {
         sqlSession2.commit();
         sqlSession2.close();
     }
+
+    @Test
+    public void testDataSource() throws IOException {
+        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis-config.xml"));
+        SqlSession sqlSession = sessionFactory.openSession();
+        sqlSession.insert("car.insertCar");
+        sqlSession.commit();
+        sqlSession.close();
+    }
 }

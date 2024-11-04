@@ -3,6 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <properties resource="jdbc.properties">
+        <!-- <property name="jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="jdbc.url" value="jdbc:mysql://localhost:3306/powernode"/>
+        <property name="jdbc.username" value="root"/>
+        <property name="jdbc.password" value="root123."/> -->
+    </properties>
+
     <settings>
         <!-- <setting name="logImpl" value="STDOUT_LOGGING" /> -->
         <setting name="logImpl" value="SLF4J"/>
@@ -26,13 +33,13 @@
                 3. JNDI：这是一种规范，一般都是由web容器来实现，比如tomcat
              -->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/powernode"/>
-                <property name="username" value="root"/>
-                <property name="password" value="root123."/>
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
                 <!-- 正常使用连接池的话，池中有很多参数需要配置，设置好参数可以让连接池发挥得更好 -->
                 <!-- poolMaximumActiveConnections表示连接池中最多的正在使用的连接对象数量上限 -->
-                <property name="poolMaximumActiveConnections" value=""/>
+                <property name="poolMaximumActiveConnections" value="10"/>
             </dataSource>
         </environment>
 
