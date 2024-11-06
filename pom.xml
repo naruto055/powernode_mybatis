@@ -13,6 +13,7 @@
         <module>junit-test</module>
         <module>mybatis-002-crud</module>
         <module>mybatis-003-configuration</module>
+        <module>parse-xml-by-dom4j</module>
     </modules>
 
     <dependencies>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- <setting name="logImpl" value="STDOUT_LOGGING" /> -->
+        <setting name="logImpl" value="SLF4J"/>
+    </settings>
+
+    <!-- default表示默认使用的环境 -->
+    <environments default="development">
+        <!-- 一般一个数据库会对应一个sqlSessionFactory对象 -->
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root123."/>
+            </dataSource>
+        </environment>
+
+        <!-- 这是mybatis的另一个环境，也就是连接的数据库是另一个数据库mybatis -->
+        <environment id="mybatisDB">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOL">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root123."/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--sql映射文件创建好之后，需要将该文件路径配置到这里-->
+        <mapper resource="CarMapper.xml"/>
+    </mappers>
+</configuration>
