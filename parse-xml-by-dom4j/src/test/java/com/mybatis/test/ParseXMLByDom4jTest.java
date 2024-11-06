@@ -2,6 +2,7 @@ package com.mybatis.test;
 
 
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
@@ -74,5 +75,35 @@ public class ParseXMLByDom4jTest {
             String resource = mapper.attributeValue("resource");
             System.out.println("mapper 的 resource 属性：" + resource);
         });
+    }
+
+    @Test
+    public void testParseSqlMapperXML() throws Exception {
+        SAXReader reader = new SAXReader();
+        InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("CarMapper.xml");
+        Document document = reader.read(is);
+        // 获取namespace
+        String xpath = "/mapper";
+        Element mapper = (Element) document.selectSingleNode(xpath);
+        String namespace = mapper.attributeValue("namespace");
+        System.out.println(namespace);
+
+        // 获取mapper节点下的子节点
+        List<Element> elements = mapper.elements();
+        elements.forEach(element -> {
+            // 获取sqlId
+            String sqlId = element.attributeValue("id");
+            System.out.println("sqlId：" + sqlId);
+            // 获取resultType
+            String resultType = element.attributeValue("resultType");
+            System.out.println(resultType);  // 没有属性的话，自动返回null
+
+            // 获取标签中的sql语句，忽略空格
+            String sqlStatement = element.getTextTrim();
+            System.out.println(sqlStatement);
+            String s = sqlStatement.replaceAll("#\\{[0-9A-Za-z_$]*}", "?");
+            System.out.println(s);
+        });
+
     }
 }
