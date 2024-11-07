@@ -18,7 +18,7 @@
         <!-- 这是mybatis的另一个环境，也就是连接的数据库是另一个数据库mybatis -->
         <environment id="mybatisDB">
             <transactionManager type="JDBC"/>
-            <dataSource type="POOL">
+            <dataSource type="UNPOOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
                 <property name="username" value="root"/>

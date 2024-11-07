@@ -5,6 +5,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import org.god.batis.utils.Resources;
 
 import javax.sql.DataSource;
 import java.io.InputStream;
@@ -82,7 +83,7 @@ public class SqlSessionFactoryBuilder {
             // 解析XXXMapper.xml 文件
             try {
                 SAXReader reader = new SAXReader();
-                Document document = reader.read(sqlMapperPath);
+                Document document = reader.read(Resources.getResourcesAsStream(sqlMapperPath));
                 Element element = (Element) document.selectSingleNode("mapper");
                 String namespace = element.attributeValue("namespace");
                 List<Element> elements = element.elements();
@@ -99,7 +100,7 @@ public class SqlSessionFactoryBuilder {
                 e.printStackTrace();
             }
         });
-        return null;
+        return mapperedStatements;
     }
 
     /**
@@ -119,7 +120,7 @@ public class SqlSessionFactoryBuilder {
         if (Constant.MANAGEMENT_TRANSACTION.equals(type)) {
             transaction = new ManagementTransaction();
         }
-        return null;
+        return transaction;
     }
 
     /**
