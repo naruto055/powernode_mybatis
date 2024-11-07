@@ -24,4 +24,28 @@ public class SqlSessionFactory {
      * value是对应的SQL标签信息对象
      */
     private Map<String , MapperedStatement> mapperedStatement;
+
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
+    public Map<String, MapperedStatement> getMapperedStatement() {
+        return mapperedStatement;
+    }
+
+    public void setMapperedStatement(Map<String, MapperedStatement> mapperedStatement) {
+        this.mapperedStatement = mapperedStatement;
+    }
+
+    public SqlSessionFactory(Transaction transaction, Map<String, MapperedStatement> mapperedStatement) {
+        this.transaction = transaction;
+        this.mapperedStatement = mapperedStatement;
+    }
+
+    public SqlSessionFactory() {
+    }
 }

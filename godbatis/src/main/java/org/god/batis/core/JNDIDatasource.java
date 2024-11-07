@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * @Author: naruto
  * @CreateTime: 2024-11-07-0:06
  */
-public class JNDIDatasource implements javax.sql.DataSource{
+public class JNDIDatasource implements javax.sql.DataSource {
     @Override
     public Connection getConnection() throws SQLException {
         return null;
