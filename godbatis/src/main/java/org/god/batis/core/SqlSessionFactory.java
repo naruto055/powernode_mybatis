@@ -23,7 +23,19 @@ public class SqlSessionFactory {
      * key是sqlId
      * value是对应的SQL标签信息对象
      */
-    private Map<String , MapperedStatement> mapperedStatement;
+    private Map<String, MapperedStatement> mapperedStatement;
+
+    /**
+     * 获取SQL会话对象
+     *
+     * @return
+     */
+    public SqlSession openSession() {
+        // 开启会话的前提是开启连接
+        transaction.openConnection();
+        SqlSession sqlSession = new SqlSession(this);
+        return sqlSession;
+    }
 
     public Transaction getTransaction() {
         return transaction;
