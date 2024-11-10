@@ -52,7 +52,7 @@ public class SqlSession {
                 index++;
             }
             // 执行SQL语句
-            count = connection.prepareStatement(sql).executeUpdate();
+            count = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -63,12 +63,11 @@ public class JDBCTransaction implements Transaction {
 
     @Override
     public void openConnection() {
-        if (connection == null) {
-            try {
-                connection = dataSource.getConnection();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        try {
+            connection = dataSource.getConnection();
+            connection.setAutoCommit(autocommit);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
