@@ -7,14 +7,12 @@
             (id, car_num, brand, guide_price, produce_time, car_type)
         values (null, #{carNum}, #{brand}, #{guidePrice}, #{produceTime}, #{carType})
     </insert>
-
-    <select id="selectById" resultType="com.naruto.mybatis.pojo.Car">
-        select id, car_num carNum, brand, guide_price guidePrice, produce_time produceTime, car_type carType
-        from t_car
-        where id = #{id};
-    </select>
     
     <insert id="insertUser">
         insert into t_user (id, name, age) values (#{id}, #{name}, #{age})
     </insert>
+
+    <select id="selectById" resultType="org.god.batis.pojo.User">
+        select * from t_user where id = #{id}
+    </select>
 </mapper>
