@@ -17,6 +17,7 @@
         <module>godbatis</module>
         <module>god-batis-test</module>
         <module>javassist-test</module>
+        <module>mybatis-005-crud2</module>
     </modules>
 
     <dependencies>
