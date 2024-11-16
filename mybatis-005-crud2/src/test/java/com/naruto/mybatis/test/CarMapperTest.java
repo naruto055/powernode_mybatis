@@ -21,6 +21,7 @@ public class CarMapperTest {
         Car car = new Car(null, "京A88888", "奔驰", 50000.0, "2023-08-08", "SUV");
         int count = mapper.insert(car);
         System.out.println(count);
+        System.out.println(car);
         sqlSession.commit();
         sqlSession.close();
     }
