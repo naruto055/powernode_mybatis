@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.naruto.myabtis.mapper.CarMapper">
+    
+    <resultMap id="carResultMap" type="Car">
+        <!-- type 属性用来指定POJO类的类名 -->
+        <id column="id" property="id"/>
+        <result column="car_num" property="carNum"/>
+        <result column="brand" property="brand"/>
+        <result column="guide_price" property="guidePrice"/>
+        <result column="produce_time" property="produceTime"/>
+        <result column="car_type" property="carType"/>
+    </resultMap>
+
+    <select id="selectById" resultType="com.naruto.myabtis.pojo.Car">
+        select *
+        from t_car where id = #{id};
+    </select>
+    <select id="selectAll" resultType="com.naruto.myabtis.pojo.Car">
+        select *
+        from t_car;
+    </select>
+    <select id="selectByBrandLike" resultType="com.naruto.myabtis.pojo.Car">
+        select *
+        from t_car where brand like concat('%', #{brand}, '%');
+    </select>
+    <select id="selectByIdRetrunMap" resultType="java.util.Map">
+        select *
+        from t_car where id = #{id};
+    </select>
+    <select id="selectAllRetrunListMap" resultType="java.util.Map">
+        select *
+        from t_car;
+    </select>
+    <select id="selectAllRetrunMap" resultType="java.util.Map">
+        select *
+        from t_car;
+    </select>
+    <select id="selectAllByResultMap" resultMap="carResultMap">
+        select *
+        from t_car;
+    </select>
+    <select id="selectAllMapUnderscoreToCamelCase" resultType="Car">
+        select *
+        from t_car;
+    </select>
+</mapper>
