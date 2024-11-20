@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.naruto.myabtis.mapper.CarMapper">
+
+    <resultMap id="carResultMap" type="Car">
+        <!-- type 属性用来指定POJO类的类名 -->
+        <id column="id" property="id"/>
+        <result column="car_num" property="carNum"/>
+        <result column="brand" property="brand"/>
+        <result column="guide_price" property="guidePrice"/>
+        <result column="produce_time" property="produceTime"/>
+        <result column="car_type" property="carType"/>
+    </resultMap>
+    <sql id="carColumnNameSql">
+        id,
+        car_num as carNum,
+        brand,
+        guide_price as guidePrice,
+        produce_time as produceTime,
+        car_type
+    </sql>
+    <insert id="insertBatch">
+        insert into t_car values
+        <foreach collection="cars" item="car" separator=",">
+            (null, #{car.carNum}, #{car.brand}, #{car.guidePrice}, #{car.produceTime}, #{car.carType})
+        </foreach>
+    </insert>
+    <delete id="deleteByIds">
+        delete
+        from t_car
+        where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectByMultipleParams" resultType="com.naruto.myabtis.pojo.Car">
+        select *
+        from t_car
+        where 1 = 1
+        <if test="brand != null and brand != ''">
+            and brand like concat('%', #{brand}, '%')
+        </if>
+        <if test="guidePrice != null and guidePrice != ''">
+            and guide_price &gt;= #{guidePrice}
+        </if>
+        <if test="carType != null and carType != ''">
+            and car_type = #{carType};
+        </if>
+    </select>
+    <select id="selectByMultiConditionWithWhere" resultType="Car">
+        select *
+        from t_car
+        <where>
+            <if test="brand != null and brand != ''">
+                and brand like concat('%', #{brand}, '%')
+            </if>
+            <if test="guidePrice != null and guidePrice != ''">
+                and guide_price &gt;= #{guidePrice}
+            </if>
+            <if test="carType != null and carType != ''">
+                and car_type = #{carType};
+            </if>
+        </where>
+    </select>
+    <select id="selectByMultiConditionWithTrim" resultMap="carResultMap">
+        select *
+        from t_car
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="brand != null and brand != ''">
+                and brand like concat('%', #{brand}, '%')
+            </if>
+            <if test="guidePrice != null and guidePrice != ''">
+                and guide_price &gt;= #{guidePrice}
+            </if>
+            <if test="carType != null and carType != ''">
+                and car_type = #{carType};
+            </if>
+        </trim>
+    </select>
+    <select id="selectByChoose" resultMap="carResultMap">
+        select *
+        from t_car
+        <where>
+            <choose>
+                <when test="brand != null and brand != ''">
+                    brand like "%"#{brand}"%"
+                </when>
+                <when test="guidePrice != null and guidePrice != ''">
+                    guide_price = #{guidePrice}
+                </when>
+                <otherwise>
+                    car_type = #{carType}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <update id="updateById">
+        update t_car
+        <set>
+            <if test="carNum != null and carNum != ''">
+                car_num = #{carNum},
+            </if>
+            <if test="guidePrice != null and guidePrice != ''">
+                guide_price = #{guidePrice},
+            </if>
+            <if test="brand != null and brand != ''">
+                brand = #{brand},
+            </if>
+            <if test="produceTime != null and produceTime != ''">
+                produce_time = #{produceTime},
+            </if>
+            <if test="carType != null and carType != ''">
+                car_type = #{carType}
+            </if>
+        </set>
+        where id = #{id};
+    </update>
+    <select id="selectById2" resultType="Car">
+        select
+        <include refid="carColumnNameSql"/>
+        where id = #{id}
+    </select>
+</mapper>

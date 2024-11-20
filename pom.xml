@@ -20,6 +20,7 @@
         <module>mybatis-005-crud2</module>
         <module>mybatis-007-param</module>
         <module>mybatis-008-select</module>
+        <module>mybatis-009-dynamic</module>
     </modules>
 
     <dependencies>
