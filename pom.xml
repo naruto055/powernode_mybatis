@@ -21,6 +21,7 @@
         <module>mybatis-007-param</module>
         <module>mybatis-008-select</module>
         <module>mybatis-009-dynamic</module>
+        <module>mybatis-010-advanced-mapping</module>
     </modules>
 
     <dependencies>
@@ -49,6 +50,11 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.11</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
         </dependency>
     </dependencies>
 
