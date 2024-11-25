@@ -22,6 +22,7 @@
         <module>mybatis-008-select</module>
         <module>mybatis-009-dynamic</module>
         <module>mybatis-010-advanced-mapping</module>
+        <module>mybatis-011-cache</module>
     </modules>
 
     <dependencies>
